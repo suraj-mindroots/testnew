@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFC Tools</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body style="width: 100vw; height: 100vh;">
+
+  <!-- Encabezado -->
+  <div style="height: 15vh; background-color: #15508d ; padding: 0px 360px;" class="d-flex align-items-center w-100" >
+    <div class="text-center" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+      <h2 class="text-white">SISTEMA DE CONTROL DE CUMPLIMIENTO DE LA NORMATIVA LABORAL PORTUARIA</h2>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div style="height: 70vh;" class="d-flex align-items-center w-100 ">
+    <div class="container-fluid d-flex align-items-center h-100 w-100">
+      <div class="w-100">
+        <div class="row w-100">
+          <div class="col-2"></div>
+            <div class="col-4 text-center">
+              <form id="startJob" method="POST" action="#">
+              <button type="submit" class="btn btn-primary btn-lg w-100 " id="botoniniciojornada">
+              <H2>Inicio Jornada </H2><img src="../img/inicio.png" ></button>
+              </form>
+              <br>
+            </div>
+                <div class="col-4 text-center">
+                  <form id="startLunch" method="POST" action="#">
+                  <button type="submit" class="btn btn-success btn-lg w-100" id="botondescanso">
+                  <h2>Inicio Colación </h2><img src="../img/descanso.png"></button>
+                  </form>
+            </div>
+              <div class="col-2  text-center" style="bottom: 10cm; height: 150px; width: 150px;">
+                <img src="../img/logotps2.PNG">
+              </div>
+       </div>
+
+       <p class="fs-1 text-center" id="logo">SCCNLP</p>
+
+       <div class="row w-100">
+          <div class="col-2 "></div>
+          <div class="col-4 text-center">
+            <form id="endJob" method="POST" action="#">
+              <button type="submit" class="btn btn-primary btn-lg w-100" id="botonfinjornada">
+                <h2>Termino Jornada </h2><img src="../img/fin.png">
+              </button>
+            </form>
+          </div>
+          <div class="col-4 text-center">
+            <form id="endLunch" method="POST" action="#">
+              <button type="submit" class="btn btn-success btn-lg w-100" id="botonfindescanso">
+                <h2>Termino Colación</h2> <img src="../img/findescanso.png">
+              </button>
+            </form>
+          </div>
+          <div class="col-2">
+             <!-- MUESTRA LA FECHA ACTUAL POR PANTALLA -->
+             <div class="container-fluid text-end">
+                <figure>
+                  <header>
+                    <script>
+                      var	day = new Date().getDay();
+                      week = new Array('Domingo','Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado');
+                      document.write(week[day]);
+                    </script>
+                  </header>
+                    <section>
+                      <script>
+                        document.write(new Date().getDate());
+                      </script>
+                    </section>
+                </figure>
+              </div>
+              <!--------------------------------------------->
+  
+              <!-- MUESTRA LA HORA ACTUAL POR PANTALLA -->
+              <div id="div1 text-end text-end">
+                <p class="current" id="time"></p>
+              </div>
+              <!--------------------------------------------->
+          </div>
+        </div>       
+      </div>
+    </div>
+    <img src="../img/logostage.png" style="position: absolute; display: flex; left: 0; float: left; bottom: 15%;"> 
+  </div>
+
+
+  <!-- Footer -->
+  <div class="row d-flex align-items-center " style="height: 15vh; background:  #15508d ; " >
+    <div class="row w-100">
+        <div class="col-3 text-white text-start">
+          <P></P>
+          <P></P>
+          <P></P>
+          <P></P>
+          <p>&copy;TPSV V:1.0</p>
+        </div>
+          <div class="col-6 text-center ">
+            <p><img src="../img/logotps.png" style="height: 100px;"></p>
+          </div>
+            <div class="col-3 text-end">
+              <p class="servidor" id="online"><img src="" id="img"></p>
+            </div>       
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="mdlReadNfc" tabindex="-1" aria-labelledby="mdlReadNfc" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img class="img-fluid" src="https://i.gifer.com/N4ox.gif">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- necesario para el funcionamiento de hora y fecha -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.9/moment-timezone-with-data-2010-2020.min.js'></script><script  src="./time.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
